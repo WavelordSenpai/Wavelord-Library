@@ -1,0 +1,16 @@
+{
+  "name": "Wavelord Library",
+  "short_name": "Wavelord",
+  "description": "A place between the pages - your private library",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#100b08",
+  "theme_color": "#17100c",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
