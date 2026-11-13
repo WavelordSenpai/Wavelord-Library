@@ -1,0 +1,43 @@
+name: Build Wavelord APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install Bubblewrap
+        run: npm install -g @bubblewrap/cli
+
+      - name: Build APK
+        run: |
+          mkdir -p twa-project
+          cd twa-project
+          bubblewrap init --manifest https://wavelord-library.netlify.app/manifest.webmanifest --directory . --skipPwaValidation || true
+          bubblewrap build || true
+          ls -R app/build/outputs/apk/ || ls -R ./
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: wavelord-apk
+          path: |
+            twa-project/app/build/outputs/apk/debug/*.apk
+            twa-project/app/build/outputs/bundle/debug/*.aab
