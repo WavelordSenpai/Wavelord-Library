@@ -1,0 +1,8 @@
+{
+  "name": "Wavelord Library",
+  "description": "A place between the pages - your private library",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
